@@ -37,15 +37,14 @@ while True:
     screen.fill(white)
     # surface, color, (x,y), radius
     for i in range(1):
-        random_x = random.randint(
-            0, 850)
+        random_x = random.randint(0, 850)
         random_y = random.randint(0, 450)
         print(random_x, random_y)
         pygame.draw.circle(screen, color, (random_x, random_y), 50)
-    # for i in range(1):
-    #     print(x, y)
-    #     pygame.draw.circle(screen, color, (x, y), 50)
-    # pygame.draw.circle(screen, colorBall2, (x2, y2), 50)
+        # for i in range(20):
+        #     #     print(x, y)
+        #     pygame.draw.circle(screen, color, (x, y), 50)
+        # pygame.draw.circle(screen, colorBall2, (x2, y2), 50)
     x += moveX
     y += moveY
 
