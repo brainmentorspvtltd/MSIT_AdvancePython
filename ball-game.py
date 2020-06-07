@@ -51,7 +51,7 @@ while True:
     x2 += moveXBall2
     y2 += moveYBall2
 
-    if y > 450:
+    if y > height - 50:
         moveY = random.randint(-10, -5)
     if y < 50:
         moveY = random.randint(5, 10)
