@@ -20,10 +20,8 @@ class Ball:
 
     def __init__(self):
         self.radius = random.randint(10, 50)
-        # self.x = random.randint(0, width - self.radius)
-        # self.y = random.randint(0, height - self.radius)
-        self.x = 0
-        self.y = 0
+        self.x = random.randint(0, width - self.radius)
+        self.y = random.randint(0, height - self.radius)
         self.moveX = random.randint(5, 10)
         self.moveY = random.randint(5, 10)
         self.color = random.randint(0, 255), random.randint(
@@ -42,10 +40,24 @@ class Ball:
         elif self.y < self.radius:
             self.moveY = random.randint(5, 10)
 
+    def checkCollision(self):
+        for ball in ballsList:
+            if ball is self:
+                continue
+            distanceBtwBalls = math.sqrt(
+                ((ball.x - self.x) ** 2) + ((ball.y - self.y) ** 2))
+            if distanceBtwBalls <= self.radius + ball.radius:
+                self.moveX, ball.moveX = ball.moveX, self.moveX
+                self.moveY, ball.moveY = ball.moveY, self.moveY
+
+    # destructor
+    def __del__(self):
+        print("Ball deleted")
+
 
 ballsList = []
 
-for i in range(4):
+for i in range(10):
     ball = Ball()
     ballsList.append(ball)
 

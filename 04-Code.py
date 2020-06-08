@@ -1,6 +1,7 @@
 class Employee:
     # constructor # magic method
     # this fn will be automatically called when we create Employee object
+    # default constructor (constructor without any parameters)
     def __init__(self):
         print("Constructor called")
         self.id = None
@@ -21,12 +22,18 @@ class Employee:
         self.employeeDetails.append(
             [self.id, self.name, self.salary, self.age, self.company])
 
+    def __del__(self):
+        print(f"Employee {self.name} fired...")
+
 
 employee1 = Employee()
 employee1.id = 101
 employee1.name = "John"
 employee1.salary = 45000
 employee1.age = 40
+
+employee1 = Employee(101, "John", 45000, 40)
+
 employee1.setEmployeeDetails()
 print(employee1.employeeDetails)
 
@@ -39,6 +46,8 @@ employee2.age = 35
 employee2.company = "XYZ, Inc."
 employee2.setEmployeeDetails()
 print(employee2.employeeDetails)
+
+del employee2
 
 employee3 = Employee()
 employee3.id = 103

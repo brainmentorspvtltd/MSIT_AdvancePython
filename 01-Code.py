@@ -19,6 +19,11 @@ class Employee:
 
 
 employee1 = Employee()
+print(employee1)
+newEmployee = employee1
+print(id(employee1))
+print(id(newEmployee))
+
 employee1.id = 101
 employee1.name = "John"
 employee1.salary = 45000
@@ -62,3 +67,4 @@ print(employee2.__dict__)
 # Screen()
 # SysFont()
 # BeautifulSoup()
+print(employee2 is not newEmployee)
