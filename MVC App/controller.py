@@ -1,8 +1,8 @@
 import model
 
 
-def login():
-    pass
+def login(email, password):
+    return model.login(email, password)
 
 
 def register(name, email, password):

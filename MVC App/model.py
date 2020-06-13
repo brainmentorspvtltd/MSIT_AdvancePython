@@ -1,10 +1,17 @@
+import pymysql
+
+connection = pymysql.connect(host="localhost", port=3306, user="root",
+                             database="db_demo", autocommit=True)
+cursor = connection.cursor()
+
+
 class User:
 
     # users = []
 
     # parameterised constructor (cons with parameters other than self)
     def __init__(self, name, email, password):
-        self.name = name
+        self.__name = name
         self.email = email
         self.password = password
 
@@ -21,17 +28,29 @@ class User:
     #     pass
 
 
-users = []
+# users = []
 
 
-def login():
-    pass
+def login(email, password):
+    query = "select * from users where email = %s and password = %s"
+    cursor.execute(query, (email, password))
+    # cursor.rowcount()
+    data = cursor.fetchall()
+    if len(data) < 1:
+        return "User doesn't exist..."
+    else:
+        return data
 
 
 def register(name, email, password):
     user = User(name, email, password)
-    users.append(user)
-    return user
+    # users.append(user)
+    query = "insert into users values (%s, %s, %s)"
+    try:
+        cursor.execute(query, (name, email, password))
+        return user
+    except pymysql.err.IntegrityError:
+        return "Email ID already exists..."
     # print(user.__str__())
     # for key in dict1.keys():
     #     print(key)
@@ -51,3 +70,7 @@ Sql - Structured Query Language
 Alternative 
 1. Download and install xampp
 '''
+
+user = User("Ram", "ram@gmail.com", "ram1234")
+user.__name = "Abc"
+print(user.__name)
