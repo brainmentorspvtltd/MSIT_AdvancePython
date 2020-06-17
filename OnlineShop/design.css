@@ -1,0 +1,23 @@
+.Kitchen_Appliances img {
+    height: 250px;
+}
+
+.Home_Appliances img {
+    height: 200px;
+}
+
+.Water_Purifiers img {
+    height: 300px;
+    width: 80%;
+    align-self: center;
+}
+
+.Air_Conditioners img {
+    height: 175px;
+    padding-top: 60px;
+    padding-bottom: 50px;
+}
+
+.Window_Air_Conditioners img {
+    height: 125px;
+}
