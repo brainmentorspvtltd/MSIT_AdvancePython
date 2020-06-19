@@ -1,4 +1,7 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
+
+import base
+
 products = [
     {
         "p_id": 101,
@@ -95,61 +98,73 @@ products = [
         "brand": "Voltas",
         "price": 31499,
         "image": "https://rukminim1.flixcart.com/image/416/416/jucz98w0/air-conditioner-new/z/h/q/155v-dzw-r32-1-2-split-voltas-inverter-original-imaffdt8gyxqxfae.jpeg?q=70"
-    }
+    },
+    {"p_id": 113,
+     "p_category": "Wrist_Watch",
+     "p_name": "G736 Analog Digital Watch - For Men",
+     "brand": "G Shock",
+     "price": 16145,
+     "image": "https://rukminim1.flixcart.com/image/800/960/jmxrwy80/watch/e/e/w/g736-casio-original-imaeykdxegwfrcgv.jpeg?q=50"
+     },
+
+    {"p_Id": 114,
+     "p_category": "Television",
+     "p_name": "163cm (65 inch) Ultra HD (4K) LED Smart TV ",
+     "brand": "Samsung",
+     "price": 129999,
+     "image": "https://rukminim1.flixcart.com/image/352/352/k1xwcy80/television/v/p/m/samsung-ua65ru8000kxxl-original-imafhc5jhmgwbepj.jpeg?q=70"
+     },
+
+    {"p_Id": 115,
+     "p_category": "Kitchen_Appliance",
+     "p_name": "Rapid Electric Kettle (1.5 L, Black) & Eco750 ml water bottle",
+     "brand": "Butterfly",
+     "price": 699,
+     "image": "https://rukminim1.flixcart.com/image/416/416/k0wqwsw0/electric-kettle/g/t/d/butterfly-rapid-kettle-1-5-litre-wave-750-ml-water-bottle-rapid-original-imafkfy7zaekbubs.jpeg?q=70"
+     },
+
+    {"p_Id": 116,
+     "p_category": "Furniture",
+     "p_name": "Duster Leather 1 Seater Sofa  (Finish Color - Beige) ",
+     "brand": "Couch Italia",
+     "price": 37390,
+     "image": "https://rukminim1.flixcart.com/image/416/416/jog2nbk0/sofa-sectional/g/y/z/beige-corrected-leather-ci-dt-bl-1s-couch-italia-beige-original-imafawjhwc6fwqem.jpeg?q=70"
+     },
+
+    {"p_Id": 117,
+     "p_category": "Hair_Dresser",
+     "p_name": "Freshers pack NHS 870 + NHP 8100/05 Personal Care Appliance Combo  (Hair Straightener, Hair Dryer)",
+     "brand": "Nova",
+     "price": 999,
+     "image": "https://rukminim1.flixcart.com/image/416/416/jz1l7rk0/personal-care-app-combo/z/t/s/freshers-pack-nhs-870-nhp-8100-05-nova-original-imafj5a2tyf8nxnf.jpeg?q=70"
+     },
+
+    {"p_Id": 118,
+     "p_category": "Headsets",
+     "p_name": "Rockerz 255F Bluetooth Headset  (Active Black, Wireless in the ear)",
+     "brand": "Boat",
+     "price": 1499,
+     "image": "https://rukminim1.flixcart.com/image/416/416/ka5oia80/headphone/a/h/7/rockerz-255f-rockerz-255-boat-original-imafrhehhzrkd6hv.jpeg?q=70"
+     },
+
+    {"p_Id": 119,
+     "p_category": "Mobiles",
+     "p_name": "Note 7 Pro (Space Black, 64 GB)  (6 GB RAM)",
+     "brand": "Redmi",
+     "price": 12999,
+     "image": "https://rukminim1.flixcart.com/image/416/416/k0lbdzk0pkrrdj/mobile/z/j/a/mi-redmi-note-7-pro-mzb7465in-original-imafhvrdmeyweauc.jpeg?q=70"
+     },
+
+    {"p_Id": 120,
+     "p_category": "Sport_Shoes",
+     "p_name": "ALEXA Running Shoes For Women  (Black)",
+     "brand": "Campus",
+     "price": 1444,
+     "image": "https://rukminim1.flixcart.com/image/800/960/jwpa8i80/shoe/z/b/h/5g-663-9-campus-blk-rani-original-imafhcyyxzyz9dbx.jpeg?q=50"
+     }
 ]
 
-print('''
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../design.css">
-    <style>
-      .card-img-top{
-        align-self: center;
-      }
-      .card img{
-        width: 210px;
-      }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
-  <a class="navbar-brand" href="#">Online Shop</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">All Products</a>
-      </li>
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">My Cart</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-''')
+base.header()
 
 print('''
   <div class="container">
@@ -178,10 +193,4 @@ print('''
 ''')
 
 
-print('''
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
-</html>
-''')
+base.footer()
