@@ -1,4 +1,31 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
+
+import json
+
+file = open(
+    "/Users/anmolrajarora/Documents/msit-advance-python/OnlineShop/data.json")
+products = json.load(file)
+
+
+def getProducts():
+    return products
+
+
+def createProduct(product):
+    print(f'''
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div class="card {product["p_category"]}" style="width: 95%; height: 33rem; margin-bottom: 20px; padding: 10px">
+      <img src="{product["image"]}" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">{product["brand"]} {product["p_name"]}</h5>
+        <p class="card-text">Price : {product["price"]}</p>
+        <a href="cart.py?p_id={product["p_id"]}" class="btn btn-primary">Add To Cart</a>
+      </div>
+    </div>
+    </div>
+  ''')
+
+
 def header():
     print('''
     <html>
@@ -65,3 +92,6 @@ def footer():
 
 
 # products.sort(key = lambda product : product["price"])
+# body{
+#     background-image: url("https://st.depositphotos.com/1106005/5030/i/950/depositphotos_50304905-stock-photo-blue-small-polka-dot-pattern.jpg")
+# }

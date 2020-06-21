@@ -1,20 +1,19 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
 import base
+import cgi
 
-products = base.getProducts()
+form = cgi.FieldStorage()
+p_id = form.getvalue("p_id")
 
 base.header()
 
 print('''
   <div class="container">
-    <h1 class="text-center">Products</h1>
+    <h1 class="text-center">My CART</h1>
     <hr>
     <div class="row">
 ''')
-
-for product in products:
-    base.createProduct(product)
 
 print('''
     </div>
