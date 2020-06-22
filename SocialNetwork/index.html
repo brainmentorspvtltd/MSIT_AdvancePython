@@ -10,7 +10,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
 
-    <title>Hello, world!</title>
+    <title>Social Network</title>
 </head>
 
 <body>
@@ -27,43 +27,52 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <form>
+                        <h2>Login Form</h2>
+                        <hr>
+                        <form action="cgi-bin/loginController.py">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                                    anyone
-                                    else.</small>
+                                <label for="loginEmail">Email address</label>
+                                <input type="email" class="form-control" id="loginEmail" name="loginEmail">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <label for="loginPassword">Password</label>
+                                <input type="password" class="form-control" id="loginPassword" name="loginPassword">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
                     <div class="col-md-6">
-                        <form>
+                        <h2>Registration Form</h2>
+                        <hr>
+                        <form action="cgi-bin/registerController.py">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                                    anyone
-                                    else.</small>
+                                <label for="registrationName">Name</label>
+                                <input type="text" class="form-control" id="registrationName" name="registrationName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="registrationEmail">Email address</label>
+                                <input type="email" class="form-control" id="registrationEmail"
+                                    name="registrationEmail">
                             </div>
-                            <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            <div class="form-group">
+                                <label for="registrationPassword">Password</label>
+                                <input type="password" class="form-control" id="registrationPassword"
+                                    name="registrationPassword">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <select id="name" class="form-control" name="registrationCity">
+                                    <option value="delhi">Delhi</option>
+                                    <option value="mumbai">Mumbai</option>
+                                    <option value="pune">Pune</option>
+                                    <option value="chennai">Chennai</option>
+                                    <option value="bihar">Bihar</option>
+                                    <option value="punjab">Punjab</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" value="f" name="gender" id="f"><label for="f">&nbsp;Female</label>
+                                <input type="radio" value="m" name="gender" id="m"><label for="m">&nbsp;Male</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
