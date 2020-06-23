@@ -29,14 +29,15 @@
                     <div class="col-md-6">
                         <h2>Login Form</h2>
                         <hr>
-                        <form action="cgi-bin/loginController.py">
+                        <form action="cgi-bin/loginController.py" method="post">
                             <div class="form-group">
                                 <label for="loginEmail">Email address</label>
-                                <input type="email" class="form-control" id="loginEmail" name="loginEmail">
+                                <input type="email" class="form-control" id="loginEmail" name="loginEmail" required>
                             </div>
                             <div class="form-group">
                                 <label for="loginPassword">Password</label>
-                                <input type="password" class="form-control" id="loginPassword" name="loginPassword">
+                                <input type="password" class="form-control" id="loginPassword" name="loginPassword"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -44,24 +45,25 @@
                     <div class="col-md-6">
                         <h2>Registration Form</h2>
                         <hr>
-                        <form action="cgi-bin/registerController.py">
+                        <form action="cgi-bin/registerController.py" method="post">
                             <div class="form-group">
                                 <label for="registrationName">Name</label>
-                                <input type="text" class="form-control" id="registrationName" name="registrationName">
+                                <input type="text" class="form-control" id="registrationName" name="registrationName"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="registrationEmail">Email address</label>
-                                <input type="email" class="form-control" id="registrationEmail"
-                                    name="registrationEmail">
+                                <input type="email" class="form-control" id="registrationEmail" name="registrationEmail"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="registrationPassword">Password</label>
                                 <input type="password" class="form-control" id="registrationPassword"
-                                    name="registrationPassword">
+                                    name="registrationPassword" required>
                             </div>
                             <div class="form-group">
                                 <label for="city">City</label>
-                                <select id="name" class="form-control" name="registrationCity">
+                                <select id="name" class="form-control" name="registrationCity" required>
                                     <option value="delhi">Delhi</option>
                                     <option value="mumbai">Mumbai</option>
                                     <option value="pune">Pune</option>
@@ -71,8 +73,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="radio" value="f" name="gender" id="f"><label for="f">&nbsp;Female</label>
-                                <input type="radio" value="m" name="gender" id="m"><label for="m">&nbsp;Male</label>
+                                <input type="radio" value="f" name="gender" id="f" required><label
+                                    for="f">&nbsp;Female</label>
+                                <input type="radio" value="m" name="gender" id="m" required><label
+                                    for="m">&nbsp;Male</label>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

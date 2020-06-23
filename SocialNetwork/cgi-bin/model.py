@@ -21,8 +21,8 @@ def login(email, password):
     query = "select * from users where email = %s and password = %s"
     cursor.execute(query, (email, password))
     # cursor.rowcount()
-    data = cursor.fetchall()
-    if len(data) < 1:
+    data = cursor.fetchone()
+    if data == None:
         return "User doesn't exist..."
     else:
         return data
@@ -34,6 +34,6 @@ def register(name, email, password, city, gender):
     query = "insert into users values (%s, %s, %s, %s, %s)"
     try:
         cursor.execute(query, (name, email, password, city, gender))
-        return user
+        return "Registration Successful..."
     except pymysql.err.IntegrityError:
         return "Email ID already exists..."
