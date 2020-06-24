@@ -37,3 +37,6 @@ def register(name, email, password, city, gender):
         return "Registration Successful..."
     except pymysql.err.IntegrityError:
         return "Email ID already exists..."
+
+
+# print(login("anmol@gmail.com", "anmol123"))

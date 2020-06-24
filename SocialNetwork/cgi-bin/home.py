@@ -6,14 +6,10 @@ def homePage(result):
     base.header()
     if isinstance(result, str):
         print(f'''
-        <div class="container">
             <h1>{result}</h1>
-        </div>
         ''')
     else:
         print(f'''
-        <div class="container">
-            <h2>Welcome {result[0]}</h2>
-        </div>
+            <h1>Welcome {result[0]}</h1>
         ''')
     base.footer()

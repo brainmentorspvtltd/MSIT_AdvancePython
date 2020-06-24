@@ -45,7 +45,7 @@ def header():
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Edit Profile</a>
+                    <a class="nav-link" href="editProfile.py">Edit Profile</a>
                 </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
@@ -53,12 +53,14 @@ def header():
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-            </nav>
+            </nav> 
+            <div class="container">
     ''')
 
 
 def footer():
     print('''
+            </div>
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
             </script>
