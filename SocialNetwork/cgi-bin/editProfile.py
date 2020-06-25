@@ -6,7 +6,7 @@ base.header()
 print('''
     <h2>Edit Profile</h2>
     <hr>
-    <form action="profile.py" method="post">
+    <form action="profileController.py" method="post"  enctype="multipart/form-data">
         <div class="form-group">
             <label for="contact">Contact</label>
             <input type="text" class="form-control" name="contact" id="contact" aria-describedby="contactHelp">

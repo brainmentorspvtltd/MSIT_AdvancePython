@@ -1,4 +1,5 @@
 import pymysql
+import os
 
 connection = pymysql.connect(host="localhost", port=3306, user="root",
                              database="socialnetwork", autocommit=True)
@@ -38,5 +39,12 @@ def register(name, email, password, city, gender):
     except pymysql.err.IntegrityError:
         return "Email ID already exists..."
 
+
+def editProfile(contact, dob, occupation, interest, profilePic):
+    if profilePic.filename:
+        #     print(f"<h3>Profile picture is {profilePic}</h3>")
+        fileStream = open("profile_pic/" + profilePic.filename, 'wb')
+        fileStream.write(profilePic.file.read())
+        # print(profilePic.file.read())
 
 # print(login("anmol@gmail.com", "anmol123"))
