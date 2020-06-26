@@ -8,7 +8,7 @@ cursor = connection.cursor()
 
 class User:
     def __init__(self, name, email, password, city, gender):
-        self.__name = name
+        self.name = name
         self.email = email
         self.password = password
         self.city = city
@@ -35,16 +35,20 @@ def register(name, email, password, city, gender):
     query = "insert into users values (%s, %s, %s, %s, %s)"
     try:
         cursor.execute(query, (name, email, password, city, gender))
-        return "Registration Successful..."
+        return user
     except pymysql.err.IntegrityError:
         return "Email ID already exists..."
 
 
-def editProfile(contact, dob, occupation, interest, profilePic):
+def editProfile(contact, dob, occupation, interest, profilePic, email):
     if profilePic.filename:
         #     print(f"<h3>Profile picture is {profilePic}</h3>")
-        fileStream = open("profile_pic/" + profilePic.filename, 'wb')
-        fileStream.write(profilePic.file.read())
+        # fileStream = open("profile_pic/" + profilePic.filename, 'wb')
+        # fileStream.write(profilePic.file.read())
+        # print(f"type is {type(profilePic.file)}")
         # print(profilePic.file.read())
+        open("profile_pic/" + profilePic.filename,
+             'wb').write(profilePic.file.read())
+    query = "insert into profile values (%s, %s, %s, %s, %s, %s)"
 
 # print(login("anmol@gmail.com", "anmol123"))

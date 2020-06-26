@@ -1,6 +1,6 @@
-def header():
+def startPage():
     print('''
-    <!doctype html>
+        <!doctype html>
     <html lang="en">
 
     <head>
@@ -16,6 +16,23 @@ def header():
     </head>
 
     <body>
+    ''')
+
+
+def plainHeader():
+    print('''
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="../images/logo.png" width="60" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            My Personal Network
+        </a>
+    </nav>
+    <div class="container">
+    ''')
+
+
+def header(email):
+    print(f'''
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src="../images/logo.png" width="60" height="30" class="d-inline-block align-top" alt="" loading="lazy">
@@ -45,7 +62,7 @@ def header():
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="editProfile.py">Edit Profile</a>
+                    <a class="nav-link" href="editProfile.py?email={email}">Edit Profile</a>
                 </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

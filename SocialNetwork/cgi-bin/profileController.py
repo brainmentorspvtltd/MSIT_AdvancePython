@@ -12,10 +12,12 @@ occupation = form.getvalue("occupation")
 interest = form.getvalue("interest")
 # profilePic = form.getvalue("profilePic")
 profilePic = form['profilePic']
+email = form.getvalue("email")
 
-base.header()
+base.startPage()
+base.header(email)
 
 # print(profilePic)
-model.editProfile(contact, dob, occupation, interest, profilePic)
+model.editProfile(contact, dob, occupation, interest, profilePic, email)
 
 base.footer()

@@ -1,9 +1,13 @@
 #!/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
+import cgi
 import base
+# print("Content-type:text/html\r\n\r\n")
 
-base.header()
+email = cgi.FieldStorage().getvalue("email")
+base.startPage()
+base.header(email)
 
-print('''
+print(f'''
     <h2>Edit Profile</h2>
     <hr>
     <form action="profileController.py" method="post"  enctype="multipart/form-data">
@@ -40,8 +44,10 @@ print('''
             <label for="profilePic">Profile Picture</label>
             <input type="file" name="profilePic" id="profilePic" class="form-control">
         </div>
+        <input type="hidden" name="email" value="{email}">
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    
 ''')
 
 base.footer()
