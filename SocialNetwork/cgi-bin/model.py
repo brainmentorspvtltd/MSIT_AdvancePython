@@ -1,5 +1,4 @@
 import pymysql
-import os
 
 connection = pymysql.connect(host="localhost", port=3306, user="root",
                              database="socialnetwork", autocommit=True)
@@ -49,6 +48,19 @@ def editProfile(contact, dob, occupation, interest, profilePic, email):
         # print(profilePic.file.read())
         open("profile_pic/" + profilePic.filename,
              'wb').write(profilePic.file.read())
-    query = "insert into profile values (%s, %s, %s, %s, %s, %s)"
+    if email == "None":
+        raise pymysql.IntegrityError("Email address cant be none")
+    cursor.execute("delete from profile where email = %s", (email))
+    query = "insert into profile values (%s, %s, %s, %s, %s, %s);"
+    cursor.execute(query, (contact, dob, occupation,
+                           interest, profilePic.filename, email))
 
+
+def fetchProfile(email):
+    query = "select * from profile where email = %s"
+    cursor.execute(query, (email))
+    data = cursor.fetchone()
+    if data is None:
+        return ('', '', '', '', '', '')
+    return data
 # print(login("anmol@gmail.com", "anmol123"))
