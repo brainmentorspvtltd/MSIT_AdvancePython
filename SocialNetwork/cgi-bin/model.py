@@ -39,21 +39,19 @@ def register(name, email, password, city, gender):
         return "Email ID already exists..."
 
 
-def editProfile(contact, dob, occupation, interest, profilePic, email):
-    if profilePic.filename:
-        #     print(f"<h3>Profile picture is {profilePic}</h3>")
-        # fileStream = open("profile_pic/" + profilePic.filename, 'wb')
-        # fileStream.write(profilePic.file.read())
-        # print(f"type is {type(profilePic.file)}")
-        # print(profilePic.file.read())
-        open("profile_pic/" + profilePic.filename,
-             'wb').write(profilePic.file.read())
+def editProfile(contact, dob, occupation, interest, profilePic, oldProfilePic, email):
+    cursor.execute("delete from profile where email = %s", (email))
+    query = "insert into profile values (%s, %s, %s, %s, %s, %s)"
     if email == "None":
         raise pymysql.IntegrityError("Email address cant be none")
-    cursor.execute("delete from profile where email = %s", (email))
-    query = "insert into profile values (%s, %s, %s, %s, %s, %s);"
-    cursor.execute(query, (contact, dob, occupation,
-                           interest, profilePic.filename, email))
+    if profilePic.filename:
+        open("profile_pic/" + profilePic.filename,
+             'wb').write(profilePic.file.read())
+        cursor.execute(query, (contact, dob, occupation,
+                               interest, profilePic.filename, email))
+    else:
+        cursor.execute(query, (contact, dob, occupation,
+                               interest, oldProfilePic, email))
 
 
 def fetchProfile(email):
@@ -63,4 +61,12 @@ def fetchProfile(email):
     if data is None:
         return ('', '', '', '', '', '')
     return data
+
+
 # print(login("anmol@gmail.com", "anmol123"))
+
+#     print(f"<h3>Profile picture is {profilePic}</h3>")
+    # fileStream = open("profile_pic/" + profilePic.filename, 'wb')
+    # fileStream.write(profilePic.file.read())
+    # print(f"type is {type(profilePic.file)}")
+    # print(profilePic.file.read())

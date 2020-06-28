@@ -25,12 +25,12 @@ print(f'''
         <div class="form-group">
             <label for="occupation">Occupation</label>
             <select id="occupation" class="form-control" name="occupation">
-                <option value=""></option>
-                <option value="student">Student</option>
-                <option value="employed">Employed</option>
-                <option value="self-employed">Self Employed</option>
-                <option value="engineer">Engineer</option>
-                <option value="unemployed">Unemployed</option>
+                <option value="" {"selected" if data[2] == "" else ""}></option>
+                <option value="student" {"selected" if data[2] == "student" else ""}>Student</option>
+                <option value="employed" {"selected" if data[2] == "employed" else ""}>Employed</option>
+                <option value="self-employed" {"selected" if data[2] == "self-employed" else ""}>Self Employed</option>
+                <option value="engineer" {"selected" if data[2] == "engineer" else ""}>Engineer</option>
+                <option value="unemployed" {"selected" if data[2] == "unemployed" else ""}>Unemployed</option>
             </select>
         </div>
         <div class="form-group">
@@ -45,11 +45,13 @@ print(f'''
             </select>
         </div>
         <div class="form-group">
-            <label for="profilePic">Profile Picture</label>
-            <input type="file" name="profilePic" id="profilePic" class="form-control" value="{data[4]}">
+            <label for="profilePic">Update Profile Picture</label><br>
+            <img src="../profile_pic/{data[4]}" alt="&nbsp;No Profile Pic Found" width="100" height="100"><br><br>
+            <input type="file" name="profilePic" id="profilePic" class="form-control">
         </div>
         <input type="hidden" name="email" value="{email}">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" name="oldProfilePic" value="{data[4]}">
+        <button type="submit" class="btn btn-primary mb-5">Submit</button>
     </form>
     
 ''')
