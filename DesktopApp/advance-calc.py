@@ -136,7 +136,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Calculator"))
         self.resetBtn.setText(_translate("MainWindow", "AC"))
         self.toggleSignBtn.setText(_translate("MainWindow", "+/-"))
         self.percentBtn.setText(_translate("MainWindow", "%"))
@@ -167,9 +167,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         self.resetBtn.clicked.connect(self.resetText)
         self.toggleSignBtn.clicked.connect(self.toggleSign)
         self.equalsBtn.clicked.connect(self.calculate)
+        self.isDecimalUsed = False
+        self.isResultVisible = False
 
     def resetText(self):
         self.lineEdit.setText("")
+        self.isDecimalUsed = False
 
     def toggleSign(self):
         text = self.lineEdit.text()
@@ -183,11 +186,28 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
         btn = self.sender()
         text = self.lineEdit.text()
 
-        if btn in self.operators:
-            if ord(text[-1]) >= 48 and ord(text[-1]) <= 57:
+        if len(text) == 14:
+            pass
+        elif btn in self.operators:
+            self.isResultVisible = False
+            self.isDecimalUsed = False
+            if len(text) == 1:
+                pass
+            elif len(text) > 0:
+                if ord(text[-1]) >= 48 and ord(text[-1]) <= 57:
+                    text += btn.text()
+                else:
+                    text = text[:-1] + btn.text()
+            elif btn == self.subtractBtn:
+                text = btn.text()
+        elif self.isResultVisible:
+            self.lineEdit.setText("")
+            text = btn.text()
+            self.isResultVisible = False
+        elif btn == self.decimalPointBtn:
+            if not self.isDecimalUsed:
                 text += btn.text()
-            else:
-                text = text[:-1] + btn.text()
+                self.isDecimalUsed = True
         else:
             text += btn.text()
 
@@ -196,9 +216,12 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
 
     def calculate(self):
         text = self.lineEdit.text()
-        if ord(text[-1]) >= 48 and ord(text[-1]) <= 57:
-            result = eval(text)
-            self.lineEdit.setText(str(result))
+        if len(text) > 0:
+            if ord(text[-1]) >= 48 and ord(text[-1]) <= 57:
+                result = str(eval(text))
+                if result != text:
+                    self.lineEdit.setText(result[:14])
+                    self.isResultVisible = True
 
 
 if __name__ == "__main__":
