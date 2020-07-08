@@ -193,7 +193,7 @@ class Ui_MainWindow(QtWidgets.QMainWindow):
             self.isDecimalUsed = False
             if len(text) == 1:
                 pass
-            elif len(text) > 0:
+            if len(text) > 0:
                 if ord(text[-1]) >= 48 and ord(text[-1]) <= 57:
                     text += btn.text()
                 else:
