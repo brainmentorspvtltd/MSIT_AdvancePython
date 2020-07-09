@@ -1,14 +1,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+import random
+import os
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        self.commonPath = "/Users/anmolrajarora/Documents/msit-advance-python/DesktopApp/icons/"
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 603)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.musicControlFrame = QtWidgets.QFrame(self.centralwidget)
-        self.musicControlFrame.setGeometry(QtCore.QRect(0, 469, 801, 91))
+        self.musicControlFrame.setGeometry(QtCore.QRect(0, 469, 801, 120))
         self.musicControlFrame.setStyleSheet(
             "background-color: rgb(223, 233, 247);")
         self.musicControlFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -24,18 +27,21 @@ class Ui_MainWindow(object):
         self.playPauseBtn.setText("")
         self.playPauseBtn.setObjectName("playPauseBtn")
         self.nextBtn = QtWidgets.QPushButton(self.musicControlFrame)
-        self.nextBtn.setGeometry(QtCore.QRect(450, 20, 101, 71))
-        self.nextBtn.setStyleSheet("background-color: rgb(57, 163, 238);")
+        self.nextBtn.setGeometry(QtCore.QRect(450, 20, 71, 71))
+        self.nextBtn.setStyleSheet(
+            f"background-image: url({self.commonPath + 'next_btn.png'});background-color: rgb(57, 163, 238);")
         self.nextBtn.setText("")
         self.nextBtn.setObjectName("nextBtn")
         self.previousBtn = QtWidgets.QPushButton(self.musicControlFrame)
-        self.previousBtn.setGeometry(QtCore.QRect(230, 20, 101, 71))
-        self.previousBtn.setStyleSheet("background-color: rgb(57, 163, 238);")
+        self.previousBtn.setGeometry(QtCore.QRect(230, 20, 71, 71))
+        self.previousBtn.setStyleSheet(
+            f"background-image: url({self.commonPath + 'prev_btn.png'});background-color: rgb(57, 163, 238);")
         self.previousBtn.setText("")
         self.previousBtn.setObjectName("previousBtn")
         self.shuffleBtn = QtWidgets.QPushButton(self.musicControlFrame)
-        self.shuffleBtn.setGeometry(QtCore.QRect(120, 20, 101, 71))
-        self.shuffleBtn.setStyleSheet("background-color: rgb(57, 163, 238);")
+        self.shuffleBtn.setGeometry(QtCore.QRect(120, 20, 71, 71))
+        self.shuffleBtn.setStyleSheet(
+            f"background-image: url({self.commonPath + 'shuffle_btn.png'});background-color: rgb(57, 163, 238);")
         self.shuffleBtn.setText("")
         self.shuffleBtn.setObjectName("shuffleBtn")
         self.repeatBtn = QtWidgets.QPushButton(self.musicControlFrame)
@@ -61,11 +67,14 @@ class Ui_MainWindow(object):
         self.playlistTable.setGeometry(QtCore.QRect(10, 31, 221, 431))
         self.playlistTable.setObjectName("playlistTable")
         self.playlistTable.setColumnCount(2)
+        self.playlistTable.setColumnWidth(0, 150)
+        self.playlistTable.setColumnWidth(1, 52)
         self.playlistTable.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
-        item.setBackground(QtGui.QColor(109, 150, 184))
+        item.setBackground(QtGui.QColor(213, 229, 241))
         self.playlistTable.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(213, 229, 241))
         self.playlistTable.setHorizontalHeaderItem(1, item)
         self.playlistHeading = QtWidgets.QLabel(self.playlistFrame)
         self.playlistHeading.setGeometry(QtCore.QRect(80, 10, 81, 21))
@@ -92,47 +101,49 @@ class Ui_MainWindow(object):
             "font: 20pt \"American Typewriter\";")
         self.currentlyPlayingSong.setObjectName("currentlyPlayingSong")
         self.songsListFrame = QtWidgets.QFrame(self.centralwidget)
-        self.songsListFrame.setGeometry(QtCore.QRect(220, 0, 341, 471))
+        self.songsListFrame.setGeometry(QtCore.QRect(180, 0, 380, 471))
         self.songsListFrame.setStyleSheet(
             "background-color: rgb(213, 229, 241);")
         self.songsListFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.songsListFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.songsListFrame.setObjectName("songsListFrame")
         self.songsTable = QtWidgets.QListWidget(self.songsListFrame)
-        self.songsTable.setGeometry(QtCore.QRect(5, 30, 271, 441))
+        self.songsTable.setGeometry(QtCore.QRect(5, 30, 320, 441))
         self.songsTable.setObjectName("songsTable")
+        self.songsTable.setStyleSheet("font: 15pt \"American Typewriter\";")
         self.songActionTable = QtWidgets.QListWidget(self.songsListFrame)
-        self.songActionTable.setGeometry(QtCore.QRect(280, 30, 61, 441))
+        self.songActionTable.setGeometry(QtCore.QRect(330, 30, 50, 441))
         self.songActionTable.setObjectName("songActionTable")
+        self.songsTable.setStyleSheet("font: 15pt \"American Typewriter\";")
         self.featuredSongsHeading = QtWidgets.QLabel(self.songsListFrame)
         self.featuredSongsHeading.setGeometry(QtCore.QRect(60, 5, 161, 21))
         self.featuredSongsHeading.setStyleSheet(
             "font: 20pt \"American Typewriter\";")
         self.featuredSongsHeading.setObjectName("featuredSongsHeading")
-        self.splashScreenFrame = QtWidgets.QFrame(self.centralwidget)
-        self.splashScreenFrame.setGeometry(QtCore.QRect(-1, -1, 801, 600))
-        self.splashScreenFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.splashScreenFrame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.splashScreenFrame.setObjectName("splashScreenFrame")
-        self.imageLabel = QtWidgets.QLabel(self.splashScreenFrame)
-        self.imageLabel.setGeometry(QtCore.QRect(-1, -5, 801, 600))
-        self.imageLabel.setText("")
-        self.imageLabel.setObjectName("imageLabel")
+        # self.splashScreenFrame = QtWidgets.QFrame(self.centralwidget)
+        # self.splashScreenFrame.setGeometry(QtCore.QRect(-1, -1, 801, 600))
+        # self.splashScreenFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        # self.splashScreenFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        # self.splashScreenFrame.setObjectName("splashScreenFrame")
+        # self.imageLabel = QtWidgets.QLabel(self.splashScreenFrame)
+        # self.imageLabel.setGeometry(QtCore.QRect(-1, -5, 801, 600))
+        # self.imageLabel.setText("")
+        # self.imageLabel.setObjectName("imageLabel")
 
-        self.wallpaper = QtGui.QPixmap(
-            "/Users/anmolrajarora/Documents/msit-advance-python/DesktopApp/wallpaper.jpg")
-        self.imageLabel.setPixmap(self.wallpaper)
+        # self.wallpaper = QtGui.QPixmap(
+        #     "/Users/anmolrajarora/Documents/msit-advance-python/DesktopApp/wallpaper.jpg")
+        # self.imageLabel.setPixmap(self.wallpaper)
 
-        self.welcomeLabel = QtWidgets.QLabel(self.splashScreenFrame)
-        self.welcomeLabel.setGeometry(QtCore.QRect(180, 50, 451, 81))
-        self.welcomeLabel.setStyleSheet(
-            "font: italic 25pt \"Zapfino\";color: white")
-        self.welcomeLabel.setObjectName("welcomeLabel")
-        self.listenNowBtn = QtWidgets.QPushButton(self.splashScreenFrame)
-        self.listenNowBtn.setGeometry(QtCore.QRect(330, 450, 141, 51))
-        self.listenNowBtn.setStyleSheet(
-            "font: 20pt \"Montserrat Alternates\";")
-        self.listenNowBtn.setObjectName("listenNowBtn")
+        # self.welcomeLabel = QtWidgets.QLabel(self.splashScreenFrame)
+        # self.welcomeLabel.setGeometry(QtCore.QRect(180, 50, 451, 81))
+        # self.welcomeLabel.setStyleSheet(
+        #     "font: italic 25pt \"Zapfino\";color: white")
+        # self.welcomeLabel.setObjectName("welcomeLabel")
+        # self.listenNowBtn = QtWidgets.QPushButton(self.splashScreenFrame)
+        # self.listenNowBtn.setGeometry(QtCore.QRect(330, 450, 141, 51))
+        # self.listenNowBtn.setStyleSheet(
+        #     "font: 20pt \"Montserrat Alternates\";")
+        # self.listenNowBtn.setObjectName("listenNowBtn")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -173,19 +184,89 @@ class Ui_MainWindow(object):
         self.currentlyPlayingSong.setText(_translate("MainWindow", "-"))
         self.featuredSongsHeading.setText(
             _translate("MainWindow", "Featured Songs"))
-        self.welcomeLabel.setText(_translate(
-            "MainWindow", "Welcome to XOMP Player"))
-        self.listenNowBtn.setText(_translate("MainWindow", "Listen Now"))
+        # self.welcomeLabel.setText(_translate(
+        # "MainWindow", "Welcome to XOMP Player"))
+        # self.listenNowBtn.setText(_translate("MainWindow", "Listen Now"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionOpen.setText(_translate("MainWindow", "Open"))
         self.actionSave_Playlist.setText(
             _translate("MainWindow", "Save Playlist"))
         self.actionQuit.setText(_translate("MainWindow", "Quit"))
-        self.listenNowBtn.clicked.connect(self.hideSplashScreen)
+        # self.listenNowBtn.clicked.connect(self.hideSplashScreen)
+        self.shuffleBtn.clicked.connect(self.toggleShuffle)
+        self.isShuffle = False
+        self.previousBtn.clicked.connect(self.previousSong)
+        self.nextBtn.clicked.connect(self.nextSong)
+        self.featuredSongs = os.listdir(
+            "/Users/anmolrajarora/Documents/adv-python-reg-dec/MusicPlayer/songs")
+        self.playlistSongs = []
+        self.songs = self.featuredSongs
+        self.selectedPlaylist = "featured songs"
+
+        for i in range(len(self.featuredSongs)):
+            listItem = QtWidgets.QListWidgetItem()
+            listItem.setText(self.featuredSongs[i])
+            self.songsTable.addItem(listItem)
+            listItem = QtWidgets.QListWidgetItem()
+            listItem.setIcon(QtGui.QIcon(f"{self.commonPath}add_btn.png"))
+            self.songActionTable.addItem(listItem)
+
+        tableItem = QtWidgets.QTableWidgetItem()
+        tableItem.setText("Aankh_Marey.mp3")
+        tableItem2 = QtWidgets.QTableWidgetItem()
+        tableItem2.setIcon(QtGui.QIcon(f"{self.commonPath}delete_btn.png"))
+        self.playlistTable.insertRow(0)
+        self.playlistTable.setItem(0, 0, tableItem)
+        self.playlistTable.setItem(0, 1, tableItem2)
 
     def hideSplashScreen(self):
         self.splashScreenFrame.hide()
-        self.imageLabel.hide()
+
+    def toggleShuffle(self):
+        self.isShuffle = not self.isShuffle
+        if self.isShuffle:
+            self.shuffleBtn.setStyleSheet(
+                f"background-image: url({self.commonPath}shuffle_btn.png); background-color: #eea639;")
+        else:
+            self.shuffleBtn.setStyleSheet(
+                f"background-image: url({self.commonPath + 'shuffle_btn.png'}); background-color: rgb(57, 163, 238);")
+
+    def previousSong(self):
+        if self.selectedPlaylist == "user playlist":
+            self.songs = self.playlistSongs
+        else:
+            self.songs = self.featuredSongs
+
+        if self.isShuffle:
+            self.songIndex = random.randint(0, len(self.songs) - 1)
+        else:
+            self.songIndex = self.songs.index(self.currentSong)
+            self.songIndex -= 1
+            if (self.songIndex == len(self.songs)):
+                self.songIndex = 0
+            self.currentSong = self.songs[self.songIndex]
+            print(self.selectedSong)
+            self.playSong()
+
+    def nextSong(self):
+        if self.selectedPlaylist == "user playlist":
+            self.songs = self.playlistSongs
+        else:
+            self.songs = self.featuredSongs
+
+        if self.isShuffle:
+            self.songIndex = random.randint(0, len(self.songs) - 1)
+        else:
+            self.songIndex = self.songs.index(self.currentSong)
+            self.songIndex += 1
+            if (self.songIndex == len(self.songs)):
+                self.songIndex = 0
+            self.currentSong = self.songs[self.songIndex]
+            print(self.selectedSong)
+            self.playSong()
+
+    def playSong(self):
+        pass
 
 
 if __name__ == "__main__":
