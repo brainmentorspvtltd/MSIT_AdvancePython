@@ -4,6 +4,7 @@ import os
 import pygame
 import mutagen
 import threading
+import time
 pygame.mixer.init()
 
 
@@ -50,9 +51,9 @@ class Ui_MainWindow(object):
         self.shuffleBtn.setText("")
         self.shuffleBtn.setObjectName("shuffleBtn")
         self.repeatBtn = QtWidgets.QPushButton(self.musicControlFrame)
-        self.repeatBtn.setGeometry(QtCore.QRect(560, 20, 101, 71))
-        self.repeatBtn.setStyleSheet("background-color: rgb(57, 163, 238);\n"
-                                     "")
+        self.repeatBtn.setGeometry(QtCore.QRect(560, 20, 75, 71))
+        self.repeatBtn.setStyleSheet(
+            f"background-image: url({self.commonPath + 'repeat_btn.png'});background-color: rgb(57, 163, 238);")
         self.repeatBtn.setText("")
         self.repeatBtn.setObjectName("repeatBtn")
         self.songCurrentDuration = QtWidgets.QLabel(self.musicControlFrame)
@@ -101,7 +102,7 @@ class Ui_MainWindow(object):
         self.currentlyPlayingHeading.setObjectName("currentlyPlayingHeading")
         self.currentlyPlayingSong = QtWidgets.QLabel(
             self.currentlyPlayingFrame)
-        self.currentlyPlayingSong.setGeometry(QtCore.QRect(60, 60, 101, 101))
+        self.currentlyPlayingSong.setGeometry(QtCore.QRect(60, 60, 101, 250))
         self.currentlyPlayingSong.setStyleSheet(
             "font: 20pt \"American Typewriter\";")
         self.currentlyPlayingSong.setObjectName("currentlyPlayingSong")
@@ -186,7 +187,8 @@ class Ui_MainWindow(object):
         self.playlistHeading.setText(_translate("MainWindow", "Playlist"))
         self.currentlyPlayingHeading.setText(_translate("MainWindow", "Currently\n"
                                                         "  Playing"))
-        self.currentlyPlayingSong.setText(_translate("MainWindow", "Please\nIgnore\nMe"))
+        self.currentlyPlayingSong.setText(
+            _translate("MainWindow", "Please\nIgnore\nMe"))
         self.featuredSongsHeading.setText(
             _translate("MainWindow", "Featured Songs"))
         # self.welcomeLabel.setText(_translate(
@@ -207,6 +209,8 @@ class Ui_MainWindow(object):
             "/Users/anmolrajarora/Documents/adv-python-reg-dec/MusicPlayer/songs")
         self.playlistSongs = []
         self.songs = self.featuredSongs
+        self.selectedSong = self.songs[0]
+        self.currentSong = self.selectedSong
         self.selectedPlaylist = "featured songs"
 
         for i in range(len(self.featuredSongs)):
@@ -230,13 +234,32 @@ class Ui_MainWindow(object):
         self.playPauseBtn.clicked.connect(self.playSong)
         self.horizontalSlider.setDisabled(True)
         self.horizontalSlider.setMinimum(0)
-        self.t = threading.Thread(target = self.changeSliderPosition)
+        self.t = threading.Thread(target=self.changeSliderPosition)
+        self.startedPlayingSong = False
         self.t.start()
+        self.pausedSong = False
 
     def changeSliderPosition(self):
         while True:
-            print("Slider position changed...")
-
+            # print("Slider position changed...")
+            songCurrentPosition = pygame.mixer.music.get_pos()
+            print(songCurrentPosition / 1000)
+            seconds = songCurrentPosition // 1000
+            if(seconds < 0):
+                seconds = 0
+            time.sleep(1)
+            self.horizontalSlider.setValue(seconds)
+            minutes = str(seconds // 60).zfill(2)
+            seconds = str(seconds % 60).zfill(2)
+            self.songCurrentDuration.setText(f"{minutes}:{seconds}")
+            self.showCurrentSong = self.currentSong.replace(
+                " ", "\n").replace("_", "\n")
+            self.currentlyPlayingSong.setText(self.showCurrentSong)
+            songFile = mutagen.File(self.songsPath + self.currentSong)
+            songLength = int(songFile.info.length)
+            totalMinutes = str(songLength // 60).zfill(2)
+            totalSeconds = str(songLength % 60).zfill(2)
+            self.songTotalDuration.setText(f"{totalMinutes}:{totalSeconds}")
 
     def hideSplashScreen(self):
         self.splashScreenFrame.hide()
@@ -264,8 +287,10 @@ class Ui_MainWindow(object):
             self.songIndex -= 1
             if (self.songIndex == len(self.songs)):
                 self.songIndex = 0
-        self.currentSong = self.songs[self.songIndex]
-        print(self.currentSong)
+        self.selectedSong = self.songs[self.songIndex]
+        print(self.selectedSong)
+        self.startedPlayingSong = False
+        self.pausedSong = False
         self.playSong()
 
     def nextSong(self):
@@ -281,31 +306,50 @@ class Ui_MainWindow(object):
             self.songIndex += 1
             if (self.songIndex == len(self.songs)):
                 self.songIndex = 0
-        self.currentSong = self.songs[self.songIndex]
-        print(self.currentSong)
+        self.selectedSong = self.songs[self.songIndex]
+        print(self.selectedSong)
+        self.startedPlayingSong = False
+        self.pausedSong = False
         self.playSong()
 
     def playSong(self):
-        pygame.mixer.music.load(self.songsPath + self.currentSong)
-        pygame.mixer.music.play()
-        self.showCurrentSong = self.currentSong.replace(
-            " ", "\n").replace("_", "\n")
-        self.currentlyPlayingSong.setText("Aankh Marey")
-        self.horizontalSlider.setDisabled(False)
-        songFile = mutagen.File(self.songsPath + self.currentSong)
-        songLength = songFile.info.length
-        self.horizontalSlider.setMaximum(songLength)
-
+        if self.startedPlayingSong and not self.pausedSong:
+            self.playPauseBtn.setStyleSheet(
+                f"background-image: url({self.commonPath + 'play_btn.png'});background-color: rgb(57, 163, 238);")
+            pygame.mixer.music.pause()
+            self.pausedSong = True
+            print("Paused...")
+        elif self.startedPlayingSong and self.pausedSong:
+            self.playPauseBtn.setStyleSheet(
+                f"background-image: url({self.commonPath + 'pause_btn.png'});background-color: rgb(57, 163, 238);")
+            pygame.mixer.music.unpause()
+            self.pausedSong = False
+            print("Resumed...")
+        else:
+            self.playPauseBtn.setStyleSheet(
+                f"background-image: url({self.commonPath + 'pause_btn.png'});background-color: rgb(57, 163, 238);")
+            pygame.mixer.music.load(self.songsPath + self.selectedSong)
+            self.currentSong = self.selectedSong
+            pygame.mixer.music.play()
+            self.startedPlayingSong = True
+            self.pausedSong = False
+            print("Started playing...")
+            self.horizontalSlider.setDisabled(False)
+            songFile = mutagen.File(self.songsPath + self.currentSong)
+            songLength = songFile.info.length
+            self.horizontalSlider.setMaximum(songLength)
 
     def selectFeaturedSong(self, item):
         self.selectedPlaylist = "featured songs"
-        self.currentSong = item.text()
-        print(self.currentSong)
+        self.selectedSong = item.text()
+        print(self.selectedSong)
+        self.startedPlayingSong = False
 
     def selectUserPlaylistSong(self, item):
         self.selectedPlaylist = "user playlist"
-        self.currentSong = item.text()
-        print(self.currentSong)
+        self.selectedSong = item.text()
+        print(self.selectedSong)
+        self.startedPlayingSong = False
 
 
 if __name__ == "__main__":
