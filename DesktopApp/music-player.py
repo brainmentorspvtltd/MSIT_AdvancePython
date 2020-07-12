@@ -8,7 +8,7 @@ import time
 pygame.mixer.init()
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow():
     def setupUi(self, MainWindow):
         self.commonPath = "/Users/anmolrajarora/Documents/msit-advance-python/DesktopApp/icons/"
         MainWindow.setObjectName("MainWindow")
@@ -234,20 +234,33 @@ class Ui_MainWindow(object):
         self.playPauseBtn.clicked.connect(self.playSong)
         self.horizontalSlider.setDisabled(True)
         self.horizontalSlider.setMinimum(0)
+        self.currentSongPositionAccToSlider = 0
         self.t = threading.Thread(target=self.changeSliderPosition)
+        self.t.daemon = True
         self.startedPlayingSong = False
         self.t.start()
         self.pausedSong = False
+        self.horizontalSlider.sliderPressed.connect(self.changeSongPosition)
+        # self.horizontalSlider.sliderMoved.connect(self.changeSongPosition)
+
+    def changeSongPosition(self):
+        # print("Position changed")
+        self.currentSongPositionAccToSlider = self.horizontalSlider.value()
+        self.pause()
+        self.playSong(self.currentSongPositionAccToSlider)
+
+        # pygame.mixer.music.set_pos(currentSongPosition)
 
     def changeSliderPosition(self):
         while True:
             # print("Slider position changed...")
             songCurrentPosition = pygame.mixer.music.get_pos()
-            print(songCurrentPosition / 1000)
+            # print(songCurrentPosition / 1000)
             seconds = songCurrentPosition // 1000
+            seconds += self.currentSongPositionAccToSlider
             if(seconds < 0):
                 seconds = 0
-            time.sleep(1)
+            time.sleep(0.1)
             self.horizontalSlider.setValue(seconds)
             minutes = str(seconds // 60).zfill(2)
             seconds = str(seconds % 60).zfill(2)
@@ -312,13 +325,19 @@ class Ui_MainWindow(object):
         self.pausedSong = False
         self.playSong()
 
-    def playSong(self):
+    def pause(self):
+        self.playPauseBtn.setStyleSheet(
+            f"background-image: url({self.commonPath + 'play_btn.png'});background-color: rgb(57, 163, 238);")
+        pygame.mixer.music.pause()
+        self.pausedSong = True
+        print("Paused...")
+
+    def playSong(self, *args):
+        print(args)
+        if len(args) == 1 and args[0] != False:
+            pygame.mixer.music.play(start=args[0])
         if self.startedPlayingSong and not self.pausedSong:
-            self.playPauseBtn.setStyleSheet(
-                f"background-image: url({self.commonPath + 'play_btn.png'});background-color: rgb(57, 163, 238);")
-            pygame.mixer.music.pause()
-            self.pausedSong = True
-            print("Paused...")
+            self.pause()
         elif self.startedPlayingSong and self.pausedSong:
             self.playPauseBtn.setStyleSheet(
                 f"background-image: url({self.commonPath + 'pause_btn.png'});background-color: rgb(57, 163, 238);")
@@ -331,6 +350,7 @@ class Ui_MainWindow(object):
             pygame.mixer.music.load(self.songsPath + self.selectedSong)
             self.currentSong = self.selectedSong
             pygame.mixer.music.play()
+            self.currentSongPositionAccToSlider = 0
             self.startedPlayingSong = True
             self.pausedSong = False
             print("Started playing...")
@@ -355,6 +375,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    # app.aboutToQuit.connect(t.stop)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
