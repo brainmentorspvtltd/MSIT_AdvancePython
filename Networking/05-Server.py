@@ -3,7 +3,7 @@ import socket
 
 def main():
     host = "192.168.0.102"
-    port = 5000
+    port = 9999
 
     mysocket = socket.socket()
     mysocket.bind((host, port))
